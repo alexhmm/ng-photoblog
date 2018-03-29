@@ -1,0 +1,297 @@
+/* COLORS */
+
+$color-primary: #ff6a6a;
+$color-light: white;
+$color-dark: black;
+
+
+/* MIXINS */
+
+@mixin pb-transition($element, $time, $animation) {
+    transition: $element $time $animation; 
+    -moz-transition: $element $time $animation; 
+    -webkit-transition: $element $time $animation; 
+ } 
+
+@mixin pb-icon-size($size) {
+    font-size: $size;
+    height: $size;
+    width: $size;
+}  
+
+/* GENERAL */
+
+body {
+    text-align: center;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.mat-icon {
+    @include pb-icon-size(28px);
+    background-color: transparent;
+    color: $color-dark;
+ }
+
+
+/* GRID */
+
+.grid {
+    display: grid;
+    width: 100%;        
+    margin-top: 50px;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: (200px, 1fr);
+    grid-auto-flow: dense;
+    grid-gap: 15px;
+    margin-left: auto;
+    margin-right: auto;      
+    button {
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none !important;
+        font-size: 0;
+    }  
+}
+
+.grid .span-1 {
+    grid-row-end: span 1;
+    font-size: 0;
+    position: relative;
+}
+
+.grid .span-1 .overlay {
+    opacity: 1;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    height: 100%;
+    width: 100%;
+}
+
+.grid .span-2 {
+    grid-row-end: span 2;
+    width: 100%;
+    font-size: 0;
+    position: relative;
+}   
+
+.grid .span-2 .overlay {
+    opacity: 1;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    height: 100%;
+    width: 100%;
+}
+
+.grid .landscape {
+    width: 100%; 
+}
+
+.grid .portrait {
+    width: 100%;
+    max-height: 100%;
+}
+
+.grid .icon {
+    transition: opacity 0.25s;
+    background-color: $color-primary;
+    font-size: 0;
+    padding: 8px;  
+    @include pb-transition(background-color, 0.25s, ease-in-out);
+    mat-icon {
+        color: $color-light;
+    };
+    mat-icon:hover {
+        cursor: pointer;        
+    }
+}
+
+@media screen and(min-width: 960px) {
+    .grid {
+        display: grid;
+        max-width: 960px;        
+        margin-top: 70px;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-auto-rows: (200px, 1fr);
+        grid-auto-flow: dense;
+        grid-gap: 20px;
+        margin-left: auto;
+        margin-right: auto;        
+    }
+
+    .grid .span-1 .overlay {
+        opacity: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;  
+        top: 0;
+        left: 0;  
+        height: 100%;
+        width: 100%;
+        transition: opacity 0.25s;
+        background-color: rgba(0,0,0,0.5);
+    }
+    
+    .grid .span-1:hover .overlay {
+        opacity: 1;    
+        transition: opacity 0.25s;
+    }    
+
+    .grid .span-2 .overlay {
+        opacity: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;    
+        top: 0;
+        left: 0; 
+        height: 100%;
+        width: 100%;
+        transition: opacity 0.25s;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .grid .span-2:hover .overlay {
+        opacity: 1;    
+        transition: opacity 0.25s;
+    }
+
+    .grid .icon:hover {
+        background-color: $color-dark;
+    }
+}
+
+
+/* MODAL */ 
+
+.modal {        
+    /* opacity: 0; */
+    position: fixed;
+    z-index: 800;
+    padding-top: 75px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: auto; */
+    background-color: rgba(0,0,0,0.5);
+
+}
+
+.modal .content {
+    background-color: #fefefe;
+    max-width: 1050px;
+    margin: auto;
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    flex-flow: column wrap;
+    transition: width 0.25s ease-in-out;
+    -webkit-transition: width 0.25s ease-in-out;
+}
+
+.modal .content .nav {
+    width: 100%;
+    mat-icon {
+        margin: 4px;
+        color: $color-dark;
+        transition: color 0.25s ease-in-out;
+        -webkit-transition: color 0.25s ease-in-out;
+    }
+    mat-icon:hover {
+        color: $color-primary;
+        cursor: pointer;
+    }
+}
+
+.modal .content .nav .icon {
+    font-size: 0;
+}
+
+.modal .content .container {
+    position: relative;
+}
+
+.modal .content .container .overlay {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    font-size: 0;
+    transform: translateY(-50%);
+    @include pb-transition(opacity, 0.25s, ease-in-out);   
+    mat-icon {
+        color: $color-dark;
+        @include pb-transition(color, 0.25s, ease-in-out);   
+    };
+    mat-icon:hover {
+        color: $color-light;
+        /* background-color: $color-primary; */
+        cursor: pointer;        
+    }
+}
+
+.modal .content .container:hover .overlay {
+    opacity: 1; 
+    font-size: 0;
+}
+
+.modal .content .container .overlay .icon {
+    background-color: rgba(255,255,255,0.75);
+    border: 0px;
+    border-radius: 50px;
+    margin: 4px;
+    @include pb-transition(background-color, 0.25s, ease-in-out);    
+}
+
+.modal .content .container .overlay .icon:hover {
+    background-color: $color-primary;
+    border: 0px;
+    border-radius: 50px;
+    margin: 4px;
+}
+
+.modal .content .container .overlayTags {
+    opacity: 0;
+    position: absolute;
+    max-width: 100%;
+    bottom: 20px;
+    right: 20px;    
+    @include pb-transition(opacity, 0.25s, ease-in-out);    
+}
+
+.modal .content .container:hover .overlayTags {
+    opacity: 1;    
+}
+
+.modal .content .container .overlayTags .tag {
+    background-color: rgba(255,255,255,0.75);
+    padding: 4px;
+    @include pb-transition(background-color, 0.25s, ease-in-out);    
+}
+
+.modal .content .container .overlayTags .tag:hover {    
+    background-color: $color-primary;
+    color: $color-light;
+    cursor: pointer;
+}
+
+.modal .landscape {
+    max-width: 100%;
+}
+
+.modal .portrait {
+    max-height: 600px;
+}

@@ -1,0 +1,51 @@
+<div class="nav"> 
+    <div *ngIf="this.deviceWidth > 960" class="nav-xl">
+        <div class="height left">
+            <div class="favicon flex">
+                <a href="home.html"><mat-icon>monochrome_photos</mat-icon></a>
+                <div class="title left">{{ title }}</div>
+            </div>            
+        </div>
+        <div class="height right">    
+            <div class="flex">    
+                <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search">
+                <mat-icon (click)="toggleSearch()" *ngIf="!this.search">search</mat-icon>
+                <mat-icon (click)="toggleSearch()" *ngIf="this.search">close</mat-icon>
+                <div class="link"><a href="about.html">ABOUT</a></div>
+                <div class="link"><a href="imprint.html">IMPRINT</a></div>
+            </div>            
+        </div> 
+    </div>
+    <div *ngIf="this.deviceWidth < 961" class="left nav-sm">
+        <div class="height left" *ngIf="!this.search" [@enter]>
+            <div class="flex">
+                <a href="home.html"><mat-icon>monochrome_photos</mat-icon></a>
+                <span class="title">{{ title }}</span>
+            </div>            
+        </div>
+        <div class="height right"  *ngIf="!this.search" [@enter]>
+            <div class="flex">
+                <button (click)="toggleSearch()"><mat-icon>search</mat-icon></button>
+                <button (click)="toggleMenu()"><mat-icon>menu</mat-icon></button>
+            </div>        
+        </div> 
+        <div class="search" *ngIf="this.search" [@enter]>
+            <div class="flex">
+                <input type="text" placeholder="Search">
+                <div class="right">
+                    <button (click)="toggleSearch()"><mat-icon>close</mat-icon></button>
+                </div>           
+            </div>             
+        </div>
+        <div class="menu" *ngIf="this.menu" [@enter]>
+            <div class="menu-top">
+                <button (click)="toggleMenu()" class="right"><mat-icon>menu</mat-icon></button>
+            </div>            
+            <div class="menu-content">
+                <a href="about.html">ABOUT</a><br><br>
+                <a href="imprint.html">IMPRINT</a>
+            </div>
+        </div>
+    </div>
+</div>
+<pb-gallery></pb-gallery>
