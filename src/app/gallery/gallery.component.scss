@@ -103,17 +103,31 @@ body {
 
 .grid .icon {
     transition: opacity 0.25s;
-    background-color: $color-primary;
+    background-color: rgba(255,255,255,0.75);
     font-size: 0;
     padding: 8px;  
     @include pb-transition(background-color, 0.25s, ease-in-out);
     mat-icon {
-        color: $color-light;
+        color: $color-dark;
+        @include pb-transition(color, 0.25s, ease-in-out);
     };
     mat-icon:hover {
         cursor: pointer;        
     }
 }
+
+
+/* BIG SCREEN */
+
+.grid .icon:hover {
+    background-color: $color-primary;
+    mat-icon {
+        color: $color-light;            
+    };
+    mat-icon:hover {
+        cursor: pointer;    
+    }
+}    
 
 @media screen and(min-width: 960px) {
     .grid {
@@ -165,10 +179,6 @@ body {
     .grid .span-2:hover .overlay {
         opacity: 1;    
         transition: opacity 0.25s;
-    }
-
-    .grid .icon:hover {
-        background-color: $color-dark;
     }
 }
 
