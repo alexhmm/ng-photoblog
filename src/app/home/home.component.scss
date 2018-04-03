@@ -68,7 +68,7 @@ button {
 }
 
 
-/* NAVIGATION */
+/* NAVIGATION BIG DEVICES */
 
 .nav {    
     z-index: 700;
@@ -169,16 +169,19 @@ button {
     }    
 }
 
-/* SMALL DEVICES */
+
+/* NAVIGATION SMALL DEVICES */
 
 .nav-sm {
-    width: 95%;
+    width: 100%;
+    height: 100%;
+    color: $color-dark;     
     input {
         height: 60%;
         width: 75%;
         background: transparent;
         border: 1px solid rgba(0,0,0,0.33);
-        border-radius:10px;
+        border-radius: 12px;
         /* -ms-input-placeholder: { text-align: center };
         -moz-placeholder: { text-align: center };
         -webkit-input-placeholder: { text-align: center }; */
@@ -187,10 +190,40 @@ button {
     input:focus { 
         outline: none !important;
     }
+    mat-icon {
+        @include pb-transition(color, 0.25s, ease-in-out);
+        @include pb-transition(background-color, 0.25s, ease-in-out);
+        @include pb-icon-size(28px);
+        padding: 6px;
+    }
+    mat-icon:hover {
+        color: $color-light;
+        background-color: $color-primary;
+        cursor: pointer;
+    }
+}
+
+.nav-sm .favicon {
+    mat-icon {
+        background-color: $color-primary;
+        color: $color-light;
+        padding: 4px;
+        margin-left: 4px;
+        @include pb-icon-size(24px);
+        @include pb-transition(color, 0.25s, ease-in-out);
+        @include pb-transition(background-color, 0.25s, ease-in-out);
+        border: 0px;
+        border-radius: 24px;
+    }
+    mat-icon:hover {
+        background-color: black;
+        color: $color-light;
+        cursor: pointer;
+    }
 }
 
 .nav-sm .title {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 100;
     letter-spacing: 1px; 
     padding-left: 20px;
@@ -218,29 +251,39 @@ button {
 }
 
 .nav-sm .menu-top {
-    width: 95%;
+    width: 100%;
     top: 0;
     left: 0;
     height: 40px;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
     border-bottom: 1px solid $color-light;
     mat-icon {
-        margin-top: 3px;
+        @include pb-transition(color, 0.25s, ease-in-out);
+        @include pb-transition(background-color, 0.25s, ease-in-out);
+        @include pb-icon-size(28px);
+        padding: 6px;
         color: $color-light;
+        background-color: $color-dark;
+    }
+    mat-icon:hover {
+        color: $color-light;
+        background-color: $color-primary;
+        cursor: pointer;
     }
 }
 
 .nav-sm .menu-content {
     color: $color-light;
     text-align: center;    
-    margin-top: 30px;
+    margin-top: 50px;
     a {
         font-size: 24px;
         text-decoration: none;
         color: $color-primary;
     }
 }
+
+
+/* BIG DEVICES */
 
 @media screen and(min-width: 960px) {
     .nav {

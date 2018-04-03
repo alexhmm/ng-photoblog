@@ -18,28 +18,28 @@
     </div>
     <div *ngIf="this.deviceWidth < 961" class="left nav-sm">
         <div class="height left" *ngIf="!this.search" [@enter]>
-            <div class="flex">
+            <div class="favicon flex">
                 <a href="home.html"><mat-icon>monochrome_photos</mat-icon></a>
                 <span class="title">{{ title }}</span>
             </div>            
         </div>
         <div class="height right"  *ngIf="!this.search" [@enter]>
             <div class="flex">
-                <button (click)="toggleSearch()"><mat-icon>search</mat-icon></button>
-                <button (click)="toggleMenu()"><mat-icon>menu</mat-icon></button>
+                <mat-icon (click)="toggleSearch()">search</mat-icon>
+                <mat-icon (click)="toggleMenu()">menu</mat-icon>
             </div>        
         </div> 
         <div class="search" *ngIf="this.search" [@enter]>
             <div class="flex">
                 <input type="text" placeholder="Search">
                 <div class="right">
-                    <button (click)="toggleSearch()"><mat-icon>close</mat-icon></button>
+                    <mat-icon  (click)="toggleSearch()">close</mat-icon>
                 </div>           
             </div>             
         </div>
         <div class="menu" *ngIf="this.menu" [@enter]>
-            <div class="menu-top">
-                <button (click)="toggleMenu()" class="right"><mat-icon>menu</mat-icon></button>
+            <div class="menu-top right">
+                <mat-icon (click)="toggleMenu()" class="right">menu</mat-icon>
             </div>            
             <div class="menu-content">
                 <a href="about.html">ABOUT</a><br><br>
