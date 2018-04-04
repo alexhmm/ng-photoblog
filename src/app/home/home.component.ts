@@ -7,8 +7,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
   animations: [
-    trigger(
-      'enter', [
+    trigger('enter', [
         transition(':enter', [
           style({opacity: 0}),
           animate('250ms', style({opacity: 1}))
@@ -18,7 +17,16 @@ import { DOCUMENT } from '@angular/common';
           animate('250ms', style({opacity: 0}))
         ])
       ]
-    )
+    ),
+    trigger('navHeight', [
+      state('top', style({
+        height: '70px',
+      })),
+      state('scroll', style({
+        height: '50px',
+      })),
+      transition('top <=> scroll', animate('100ms ease-in-out'))
+    ])
   ]
 })
 
@@ -27,6 +35,7 @@ export class HomeComponent implements OnInit {
   title = 'PHOTO BLOG';
   search = false;
   menu = false;
+  stateNavigation;
   stateSearchDiv = 'inactive';
   stateScrollbar = 'auto';
   deviceWidth = window.innerWidth;
@@ -35,20 +44,14 @@ export class HomeComponent implements OnInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  /* onWindowScroll($event) {
-    const offset = window.pageYOffset;
-    if (offset > 50) {
-      const navEl = this.elRef.nativeElement.querySelector('.nav');
-      this.renderer.setElementStyle(navEl, 'border-bottom', 'solid 1px black');
-    } else {
-      const navEl = this.elRef.nativeElement.querySelector('.nav');
-      this.renderer.setElementStyle(navEl, 'border', '0px');
-    }
-  } */
+  onWindowScroll($event) {
+    this.setStateNavigation();
+  }
 
   @HostListener('window: resize', ['$event'])
   onWindowResize($event) {
     this.deviceWidth = window.innerWidth;
+    this.setStateNavigation();
     if (this.deviceWidth > 959) {
       // tslint:disable-next-line:curly
       if (this.stateScrollbar === 'hidden') this.toggleMenu(this.menu);
@@ -57,6 +60,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     console.log('width: ' + window.innerWidth);
+    this.setStateNavigation();
+  }
+
+  setStateNavigation() {
+    const offset = window.pageYOffset;
+    if (this.deviceWidth > 959) {
+      if (offset > 30) {
+        this.stateNavigation = 'scroll';
+      } else {
+        this.stateNavigation = 'top';
+      }
+    } else {
+      this.stateNavigation = 'scroll';
+    }
   }
 
   toggleSearch(search) {

@@ -28,10 +28,6 @@ $color-dark: black;
 
 /* GENERAL */
 
-body {
-    background-color: #e0e0e0;
-}
-
 .left {
     float: left;
 }
@@ -84,6 +80,7 @@ button {
     -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.033);
     -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.033);
     box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.033);
+    @include pb-transition(height, 0.25, ease-in-out);
 }
 
 .nav-xl {
@@ -92,7 +89,7 @@ button {
     color: $color-dark;     
     input {
         min-width: 450px;
-        height: 50%;
+        height: 24px;
         background: transparent;
         border: 1px solid rgba(0,0,0,0.33);
         border-radius:5px;
@@ -121,6 +118,7 @@ button {
         background-color: $color-primary;
         color: $color-light;
         padding: 8px;
+        margin-left: 13px;
         @include pb-transition(color, 0.25s, ease-in-out);
         @include pb-transition(background-color, 0.25s, ease-in-out);
         border: 0px;
@@ -286,7 +284,10 @@ button {
 
 @media screen and(min-width: 960px) {
     .nav {
-        height: 50px;
+        height: 70px;
+        /* @include pb-transition(height, 0.25, ease-in-out); */
+        transition: height 0.25; 
+        -webkit-transition: height 0.25; 
     } 
 
     .title {

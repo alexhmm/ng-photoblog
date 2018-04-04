@@ -45,7 +45,7 @@ body {
 .grid {
     display: grid;
     width: 100%;        
-    margin-top: 50px;
+    margin-top: 60px;
     justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-auto-rows: (200px, 1fr);
@@ -133,7 +133,7 @@ body {
     .grid {
         display: grid;
         max-width: 960px;        
-        margin-top: 70px;
+        margin-top: 90px;
         justify-content: center;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-auto-rows: (200px, 1fr);
