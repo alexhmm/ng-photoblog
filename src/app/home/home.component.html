@@ -2,7 +2,7 @@
     <div *ngIf="this.deviceWidth > 960" class="nav-xl">
         <div class="height left">
             <div class="favicon flex">
-                <a href="home.html"><mat-icon>monochrome_photos</mat-icon></a>
+                <a routerLink="gallery"><mat-icon>monochrome_photos</mat-icon></a>
                 <div class="title left">{{ title }}</div>
             </div>            
         </div>
@@ -11,15 +11,15 @@
                 <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search">
                 <mat-icon (click)="toggleSearch()" *ngIf="!this.search">search</mat-icon>
                 <mat-icon (click)="toggleSearch()" *ngIf="this.search">close</mat-icon>
-                <div class="link"><a href="about.html">ABOUT</a></div>
-                <div class="link"><a href="imprint.html">IMPRINT</a></div>
+                <div class="link"><a routerLink="about">ABOUT</a></div>
+                <div class="link"><a routerLink="imprint">IMPRINT</a></div>
             </div>            
         </div> 
     </div>
     <div *ngIf="this.deviceWidth < 961" class="left nav-sm">
         <div class="height left" *ngIf="!this.search" [@enter]>
             <div class="favicon flex">
-                <a href="home.html"><mat-icon>monochrome_photos</mat-icon></a>
+                <a routerLink="gallery"><mat-icon>monochrome_photos</mat-icon></a>
                 <span class="title">{{ title }}</span>
             </div>            
         </div>
@@ -42,10 +42,11 @@
                 <mat-icon (click)="toggleMenu()" class="right">menu</mat-icon>
             </div>            
             <div class="menu-content">
-                <a href="about.html">ABOUT</a><br><br>
-                <a href="imprint.html">IMPRINT</a>
+                <a routerLink="gallery" (click)="toggleMenu()">GALLERY</a><br><br>
+                <a routerLink="about" (click)="toggleMenu()">ABOUT</a><br><br>
+                <a routerLink="imprint" (click)="toggleMenu()">IMPRINT</a>
             </div>
         </div>
     </div>
 </div>
-<pb-gallery></pb-gallery>
+<router-outlet></router-outlet>

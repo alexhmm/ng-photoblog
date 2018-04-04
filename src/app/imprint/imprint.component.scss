@@ -1,0 +1,12 @@
+.imprint {
+    margin-top: 70px;  
+}
+
+@media screen and(min-width: 960px) {
+    .imprint {
+        margin-top: 90px;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+}
