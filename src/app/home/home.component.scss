@@ -68,7 +68,7 @@ button {
 }
 
 
-/* NAVIGATION BIG DEVICES */
+/* NAVIGATION */
 
 .nav {    
     z-index: 700;
@@ -76,7 +76,7 @@ button {
     left: 0;
     position: fixed;
     width: 100%;
-    height: 40px;
+    height: 50px;
     background-color: $color-light;
     display: flex;    
     align-items: center;
@@ -91,8 +91,8 @@ button {
     height: 100%;
     color: $color-dark;     
     input {
-        min-width: 300px;
-        height: 20px;
+        min-width: 450px;
+        height: 50%;
         background: transparent;
         border: 1px solid rgba(0,0,0,0.33);
         border-radius:5px;
@@ -127,7 +127,7 @@ button {
         border-radius: 24px;
     }
     mat-icon:hover {
-        background-color: black;
+        background-color: $color-dark;
         color: $color-light;
         cursor: pointer;
     }
@@ -178,7 +178,8 @@ button {
     color: $color-dark;     
     input {
         height: 60%;
-        width: 75%;
+        width: 100%;
+        margin: 0px 8px 0px 8px;
         background: transparent;
         border: 1px solid rgba(0,0,0,0.33);
         border-radius: 12px;
@@ -194,7 +195,7 @@ button {
         @include pb-transition(color, 0.25s, ease-in-out);
         @include pb-transition(background-color, 0.25s, ease-in-out);
         @include pb-icon-size(28px);
-        padding: 6px;
+        padding: 11px;
     }
     mat-icon:hover {
         color: $color-light;
@@ -208,7 +209,7 @@ button {
         background-color: $color-primary;
         color: $color-light;
         padding: 4px;
-        margin-left: 4px;
+        margin-left: 8px;
         @include pb-icon-size(24px);
         @include pb-transition(color, 0.25s, ease-in-out);
         @include pb-transition(background-color, 0.25s, ease-in-out);
@@ -225,19 +226,17 @@ button {
 .nav-sm .title {
     font-size: 24px;
     font-weight: 100;
-    letter-spacing: 1px; 
+    /* letter-spacing: 1px;  */
     padding-left: 20px;
 }
 
 .nav-sm .search {
-    width: 95%; 
+    width: 100%; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px; 
-    padding-left: 2.5%;
-    padding-right: 2.5%;  
+    height: 50px; 
 }
 
 .nav-sm .menu {
@@ -254,13 +253,13 @@ button {
     width: 100%;
     top: 0;
     left: 0;
-    height: 40px;
+    height: 50px;
     border-bottom: 1px solid $color-light;
     mat-icon {
         @include pb-transition(color, 0.25s, ease-in-out);
         @include pb-transition(background-color, 0.25s, ease-in-out);
         @include pb-icon-size(28px);
-        padding: 6px;
+        padding: 11px;
         color: $color-light;
         background-color: $color-dark;
     }
@@ -274,7 +273,7 @@ button {
 .nav-sm .menu-content {
     color: $color-light;
     text-align: center;    
-    margin-top: 50px;
+    margin-top: 70px;
     a {
         font-size: 24px;
         text-decoration: none;
@@ -283,7 +282,7 @@ button {
 }
 
 
-/* BIG DEVICES */
+/* BIG SCREENS */
 
 @media screen and(min-width: 960px) {
     .nav {

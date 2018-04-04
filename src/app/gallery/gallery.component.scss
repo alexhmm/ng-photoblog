@@ -116,9 +116,6 @@ body {
     }
 }
 
-
-/* BIG SCREEN */
-
 .grid .icon:hover {
     background-color: $color-primary;
     mat-icon {
@@ -128,6 +125,9 @@ body {
         cursor: pointer;    
     }
 }    
+
+
+/* BIG SCREENS */
 
 @media screen and(min-width: 960px) {
     .grid {
