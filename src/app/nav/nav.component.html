@@ -2,7 +2,7 @@
     <div *ngIf="this.deviceWidth > 960" class="nav-xl">
         <div class="height left">
             <div class="favicon flex">
-                <a routerLink="home"><mat-icon>monochrome_photos</mat-icon></a>
+                <a routerLink="home" (click)="onActivate()"><mat-icon>monochrome_photos</mat-icon></a>
                 <div class="title left">{{ title }}</div>
             </div>            
         </div>
@@ -11,8 +11,8 @@
                 <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search" (keyup.enter)="filterImages($event.target.value)">
                 <mat-icon (click)="toggleSearch()" *ngIf="!this.search">search</mat-icon>
                 <mat-icon (click)="toggleSearch()" *ngIf="this.search">close</mat-icon>
-                <div class="link"><a routerLink="about">ABOUT</a></div>
-                <div class="link"><a routerLink="imprint">IMPRINT</a></div>
+                <div class="link"><a routerLink="about" (click)="onActivate()">ABOUT</a></div>
+                <div class="link"><a routerLink="imprint" (click)="onActivate()">IMPRINT</a></div>
             </div>            
         </div> 
     </div>
@@ -42,9 +42,9 @@
                 <mat-icon (click)="toggleMenu()" class="right">menu</mat-icon>
             </div>            
             <div class="menu-content">
-                <a routerLink="home" (click)="toggleMenu()">HOME</a><br><br>
-                <a routerLink="about" (click)="toggleMenu()">ABOUT</a><br><br>
-                <a routerLink="imprint" (click)="toggleMenu()">IMPRINT</a>
+                <a routerLink="home" (click)="toggleMenu()" (click)="onActivate()">HOME</a><br><br>
+                <a routerLink="about" (click)="toggleMenu()" (click)="onActivate()">ABOUT</a><br><br>
+                <a routerLink="imprint" (click)="toggleMenu()" (click)="onActivate()">IMPRINT</a>
             </div>
         </div>
     </div>

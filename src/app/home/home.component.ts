@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
   imageUrl: string;
   imageAlign: string;
   imageTags = [];
+  load = true;
 
   constructor(private image: Image) {
   }
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
     const body = document.body, html = document.documentElement;
     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight) {
+    if (windowBottom >= docHeight && this.load === true) {
       this.loadImages();
     }
   }
@@ -109,10 +110,27 @@ export class HomeComponent implements OnInit {
     if (this.imageModal) {
       this.toggleModal();
     }
+    this.scrolltoTop();
   }
 
   removeFilter() {
     this.filter = '';
     this.gridImages = this.image.removeFilter();
+    this.load = false;
+    this.scrolltoTop();
+    this.load = true;
+  }
+
+  scrolltoTop() {
+    const speed = window.pageYOffset / 50;
+    let pageYOffset = window.pageYOffset;
+    const int = setInterval(function() {
+      pageYOffset -= speed;
+      window.scrollTo(0, pageYOffset);
+      if (pageYOffset <= 0) {
+        window.scrollTo(0, 0);
+        clearInterval(int);
+      }
+    }, 1);
   }
 }

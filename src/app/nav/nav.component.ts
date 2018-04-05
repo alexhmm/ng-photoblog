@@ -64,6 +64,10 @@ export class NavComponent implements OnInit {
     this.setStateNavigation();
   }
 
+  onActivate() {
+    window.scrollTo(0, 0);
+  }
+
   setStateNavigation() {
     const offset = window.pageYOffset;
     if (this.deviceWidth > 959) {
@@ -91,5 +95,19 @@ export class NavComponent implements OnInit {
   filterImages(tag) {
     this.image.filterImages(tag);
     this.toggleSearch();
+    this.scrolltoTop();
+  }
+
+  scrolltoTop() {
+    const speed = window.pageYOffset / 50;
+    let pageYOffset = window.pageYOffset;
+    const int = setInterval(function() {
+      pageYOffset -= speed;
+      window.scrollTo(0, pageYOffset);
+      if (pageYOffset <= 0) {
+        window.scrollTo(0, 0);
+        clearInterval(int);
+      }
+    }, 1);
   }
 }
