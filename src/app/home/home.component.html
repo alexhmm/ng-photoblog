@@ -1,52 +1,58 @@
-<div class="nav" [@navHeight]="stateNavigation"> 
-    <div *ngIf="this.deviceWidth > 960" class="nav-xl">
-        <div class="height left">
-            <div class="favicon flex">
-                <a routerLink="gallery"><mat-icon>monochrome_photos</mat-icon></a>
-                <div class="title left">{{ title }}</div>
-            </div>            
-        </div>
-        <div class="height right">    
-            <div class="flex">    
-                <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search" (keyup.enter)="filterImages($event.target.value)">
-                <mat-icon (click)="toggleSearch()" *ngIf="!this.search">search</mat-icon>
-                <mat-icon (click)="toggleSearch()" *ngIf="this.search">close</mat-icon>
-                <div class="link"><a routerLink="about">ABOUT</a></div>
-                <div class="link"><a routerLink="imprint">IMPRINT</a></div>
-            </div>            
-        </div> 
+<div class="grid">    
+  <ng-container *ngFor="let image of gridImages; index as index">
+    <div *ngIf="image.align === 'landscape'" class="span-1" [@enter]>
+      <div class="overlay">      
+        <ng-container [ngTemplateOutlet]="overlayIcons" [ngTemplateOutletContext]="{index: index, image: image}"></ng-container>
+      </div>
+      <img src="{{ image.url }}" class="landscape">
     </div>
-    <div *ngIf="this.deviceWidth < 961" class="left nav-sm">
-        <div class="height left" *ngIf="!this.search" [@enter]>
-            <div class="favicon flex">
-                <a routerLink="gallery"><mat-icon>monochrome_photos</mat-icon></a>
-                <span class="title">{{ title }}</span>
-            </div>            
+    <div *ngIf="image.align === 'portrait' && stateGridSpan === true; else spanFalse" class="span-2" [@enter]>
+      <div class="overlay">             
+        <ng-container [ngTemplateOutlet]="overlayIcons" [ngTemplateOutletContext]="{index: index, image: image}"></ng-container>
+      </div>
+      <img src="{{ image.url }}" class="portrait">     
+    </div>    
+    <ng-template #spanFalse>
+      <div *ngIf="image.align === 'portrait'" class="span-1" [@enter]>
+        <div class="overlay">     
+          <ng-container [ngTemplateOutlet]="overlayIcons" [ngTemplateOutletContext]="{index: index, image: image}"></ng-container>
         </div>
-        <div class="height right"  *ngIf="!this.search" [@enter]>
-            <div class="flex">
-                <mat-icon (click)="toggleSearch()">search</mat-icon>
-                <mat-icon (click)="toggleMenu()">menu</mat-icon>
-            </div>        
-        </div> 
-        <div class="search" *ngIf="this.search" [@enter]>
-            <div class="flex">
-                <input type="text" placeholder="Search" (keyup.enter)="filterImages($event.target.value)">
-                <div class="right">
-                    <mat-icon  (click)="toggleSearch()">close</mat-icon>
-                </div>           
-            </div>             
-        </div>
-        <div class="menu" *ngIf="this.menu" [@enter]>
-            <div class="menu-top right">
-                <mat-icon (click)="toggleMenu()" class="right">menu</mat-icon>
-            </div>            
-            <div class="menu-content">
-                <a routerLink="gallery" (click)="toggleMenu()">GALLERY</a><br><br>
-                <a routerLink="about" (click)="toggleMenu()">ABOUT</a><br><br>
-                <a routerLink="imprint" (click)="toggleMenu()">IMPRINT</a>
-            </div>
-        </div>
-    </div>
+        <img src="{{ image.url }}" class="landscape">
+      </div>
+    </ng-template>    
+  </ng-container>
 </div>
-<router-outlet></router-outlet>
+
+<ng-template #overlayIcons let-index="index" let-image="image">
+  <div class="icon left"><mat-icon (click)="changeModalContent(index, image)">search</mat-icon></div>
+  <div class="icon left"><mat-icon>favorite</mat-icon></div> 
+  <div class="icon left"><mat-icon>share</mat-icon></div>
+</ng-template>
+
+<div *ngIf="imageModal" class="modal" [@ease]>
+  <div class="content">
+    <div class="nav">
+      <div class="icon left"><a target="_blank" href="{{ imageUrl }}"><mat-icon>search</mat-icon></a></div>
+      <div class="icon left"><mat-icon>favorite</mat-icon></div> 
+      <div class="icon left"><mat-icon>share</mat-icon></div>
+      <div class="icon right"><mat-icon (click)="toggleModal()">close</mat-icon></div>
+    </div>
+    <div class="container">
+      <div class="overlay">
+        <div *ngIf="imageIndex > 0" class="icon left"><mat-icon (click)="changeModalContent(imageIndex - 1, gridImages[imageIndex - 1])">navigate_before</mat-icon></div>
+        <div *ngIf="imageIndex < gridImages.length - 1" class="icon right"><mat-icon (click)="changeModalContent(imageIndex + 1, gridImages[imageIndex + 1])">navigate_next</mat-icon></div>
+      </div>
+      <div class="overlayTags">
+        <ng-container *ngFor="let tag of imageTags">
+          <div class="tag left" (click)="filterImages(tag)">#{{ tag }}&nbsp;</div>
+        </ng-container>
+      </div>
+      <img src="{{ imageUrl }}" class="{{ imageAlign }}" [@ease]>
+    </div>  
+  </div>  
+</div>
+
+<div *ngIf="filter" class="filter" [@ease]>
+  <div class="text left">{{ filter }}</div>
+  <div class="icon right"><mat-icon (click)="removeFilter()">close</mat-icon></div>
+</div>

@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ImprintComponent } from './imprint/imprint.component';
-import { GalleryComponent } from './gallery/gallery.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gallery',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'gallery',
-    component: GalleryComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'about',
