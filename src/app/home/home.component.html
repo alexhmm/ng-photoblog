@@ -8,7 +8,7 @@
         </div>
         <div class="height right">    
             <div class="flex">    
-                <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search">
+                <input type="text" placeholder="Search" *ngIf="this.search" [@enter] class="search" (keyup.enter)="filterImages($event.target.value)">
                 <mat-icon (click)="toggleSearch()" *ngIf="!this.search">search</mat-icon>
                 <mat-icon (click)="toggleSearch()" *ngIf="this.search">close</mat-icon>
                 <div class="link"><a routerLink="about">ABOUT</a></div>
@@ -31,7 +31,7 @@
         </div> 
         <div class="search" *ngIf="this.search" [@enter]>
             <div class="flex">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" (keyup.enter)="filterImages($event.target.value)">
                 <div class="right">
                     <mat-icon  (click)="toggleSearch()">close</mat-icon>
                 </div>           

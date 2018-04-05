@@ -7,17 +7,24 @@ $color-dark: black;
 
 /* MIXINS */
 
-@mixin pb-transition($element, $time, $animation) {
-    transition: $element $time $animation; 
-    -moz-transition: $element $time $animation; 
-    -webkit-transition: $element $time $animation; 
- } 
+@mixin pb-bow-shadow-size($h, $v, $blur, $spread, $r, $g, $b, $a) {
+    -webkit-box-shadow: $h $v $blur $spread rgba($r,$g,$b,$a);
+    -moz-box-shadow: $h $v $blur $spread rgba($r,$g,$b,$a);
+    box-shadow: $h $v $blur $spread rgba($r,$g,$b,$a);
+} 
 
 @mixin pb-icon-size($size) {
     font-size: $size;
     height: $size;
     width: $size;
-}  
+} 
+
+@mixin pb-transition($element, $time, $animation) {
+    transition: $element $time $animation; 
+    -moz-transition: $element $time $animation; 
+    -webkit-transition: $element $time $animation; 
+} 
+
 
 /* GENERAL */
 
@@ -304,4 +311,41 @@ body {
 
 .modal .portrait {
     max-height: 600px;
+}
+
+/* FILTER */
+.filter {
+    z-index: 500;
+    background-color: rgba(255,255,255,0.75);    
+    position: fixed;
+    right: 24px;
+    bottom: 24px;   
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    @include pb-bow-shadow-size(0px, 0px, 16px, 0px, 0, 0, 0, 0.25);
+    mat-icon {
+        padding: 8px;
+        color: $color-dark;
+        @include pb-transition(color, 0.25s, ease-in-out);   
+    };
+    mat-icon:hover {
+        color: $color-light;
+        /* background-color: $color-primary; */
+        cursor: pointer;        
+    }
+}
+
+.filter .text {
+    height: 100%;
+    padding: 0px 8px 0px 8px;
+}
+
+.filter .icon {        
+    font-size: 0;
+    @include pb-transition(background-color, 0.25s, ease-in-out);    
+}
+
+.filter .icon:hover {
+    background-color: $color-primary;
 }

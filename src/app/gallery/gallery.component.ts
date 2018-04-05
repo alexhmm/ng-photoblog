@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Image } from '../shared/image';
 
 @Component({
   selector: 'pb-gallery',
@@ -37,6 +38,7 @@ export class GalleryComponent implements OnInit {
 
   images = [];
   gridImages = [];
+  filter: string;
   deviceWidth = window.innerWidth;
   stateGridSpan;
   imageModal = false;
@@ -45,14 +47,7 @@ export class GalleryComponent implements OnInit {
   imageAlign: string;
   imageTags = [];
 
-  constructor() {
-    this.images = [
-      {id: 0, url: 'assets/photos/abstract-cosm.jpg', align: 'landscape', tags: 'art, abstract, white, distortion'},
-      {id: 1, url: 'assets/photos/roven1.jpg', align: 'landscape', tags: 'nature'},
-      {id: 2, url: 'assets/photos/technology.jpg', align: 'landscape', tags: 'art, abstract'},
-      {id: 3, url: 'assets/photos/texture-squares.jpg', align: 'portrait', tags: 'art, abstract'},
-      {id: 4, url: 'assets/photos/water.jpg', align: 'landscape', tags: 'nature, water, ice'}
-    ];
+  constructor(private image: Image) {
   }
 
   @HostListener('window: resize', ['$event'])
@@ -75,13 +70,16 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
     this.enableGridSpan(this.stateGridSpan);
     this.loadImages();
+    this.image.filteredImages.subscribe((filteredImages) => {
+      this.gridImages = filteredImages;
+    });
+    this.image.filterEventEmitter.subscribe((filter) => {
+      this.filter = filter;
+    });
   }
 
   loadImages() {
-    for (let i = 0; i < 20; i++) {
-      const rdm = Math.floor((Math.random() * this.images.length));
-      this.gridImages.push(this.images[rdm]);
-    }
+    this.gridImages = this.image.loadImages();
   }
 
   enableGridSpan(stateGridSpan) {
@@ -93,13 +91,10 @@ export class GalleryComponent implements OnInit {
   }
 
   changeModalContent(index, image) {
-    console.log('Index: ' + index);
-    console.log(image);
     this.imageIndex = index;
     this.imageUrl = image.url;
     this.imageAlign = image.align;
     this.imageTags = image.tags.split(', ');
-    console.log(this.imageTags);
     if (!this.imageModal) {
       this.toggleModal();
     }
@@ -107,5 +102,17 @@ export class GalleryComponent implements OnInit {
 
   toggleModal() {
     this.imageModal = !this.imageModal;
+  }
+
+  filterImages(tag) {
+    this.image.filterImages(tag);
+    if (this.imageModal) {
+      this.toggleModal();
+    }
+  }
+
+  removeFilter() {
+    this.filter = '';
+    this.gridImages = this.image.removeFilter();
   }
 }

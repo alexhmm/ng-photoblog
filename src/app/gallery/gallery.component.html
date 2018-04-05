@@ -29,7 +29,7 @@
   <div class="icon left"><mat-icon>share</mat-icon></div>
 </ng-template>
 
-<div *ngIf='imageModal' class="modal" [@ease]>
+<div *ngIf="imageModal" class="modal" [@ease]>
   <div class="content">
     <div class="nav">
       <div class="icon left"><a target="_blank" href="{{ imageUrl }}"><mat-icon>search</mat-icon></a></div>
@@ -44,10 +44,15 @@
       </div>
       <div class="overlayTags">
         <ng-container *ngFor="let tag of imageTags">
-          <div class="tag left">#{{ tag }}&nbsp;</div>
+          <div class="tag left" (click)="filterImages(tag)">#{{ tag }}&nbsp;</div>
         </ng-container>
       </div>
       <img src="{{ imageUrl }}" class="{{ imageAlign }}" [@ease]>
     </div>  
   </div>  
+</div>
+
+<div *ngIf="filter" class="filter" [@ease]>
+  <div class="text left">{{ filter }}</div>
+  <div class="icon right"><mat-icon (click)="removeFilter()">close</mat-icon></div>
 </div>

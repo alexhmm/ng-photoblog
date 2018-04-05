@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, Inject, ElementRef, Renderer } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
+import { Image } from '../shared/image';
 
 @Component({
   selector: 'pb-home',
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit {
   stateScrollbar = 'auto';
   deviceWidth = window.innerWidth;
 
-  constructor(private elRef: ElementRef, private renderer: Renderer) {
+  constructor(private elRef: ElementRef, private renderer: Renderer, private image: Image) {
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -54,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.setStateNavigation();
     if (this.deviceWidth > 959) {
       // tslint:disable-next-line:curly
-      if (this.stateScrollbar === 'hidden') this.toggleMenu(this.menu);
+      if (this.stateScrollbar === 'hidden') this.toggleMenu();
     }
   }
 
@@ -76,15 +77,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  toggleSearch(search) {
+  toggleSearch() {
     this.search = !this.search;
     this.stateSearchDiv = (this.stateSearchDiv === 'inactive' ? 'active' : 'inactive');
-    console.log(this.search + ', ' + this.stateSearchDiv);
   }
 
-  toggleMenu(menu) {
+  toggleMenu() {
     this.menu = !this.menu;
     this.stateScrollbar = (this.stateScrollbar === 'auto' ? 'hidden' : 'auto');
     document.documentElement.style.overflow = this.stateScrollbar;
+  }
+
+  filterImages(tag) {
+    this.image.filterImages(tag);
+    this.toggleSearch();
   }
 }
