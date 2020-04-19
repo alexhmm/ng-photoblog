@@ -1,6 +1,11 @@
-import { Component, OnInit, HostListener, Inject, ElementRef, Renderer } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, HostListener } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { Image } from '../shared/image';
 
 @Component({
@@ -9,30 +14,33 @@ import { Image } from '../shared/image';
   templateUrl: './nav.component.html',
   animations: [
     trigger('enter', [
-        transition(':enter', [
-          style({opacity: 0}),
-          animate('250ms', style({opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({opacity: 1}),
-          animate('250ms', style({opacity: 0}))
-        ])
-      ]
-    ),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('250ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('250ms', style({ opacity: 0 }))
+      ])
+    ]),
     trigger('navHeight', [
-      state('top', style({
-        height: '70px',
-      })),
-      state('scroll', style({
-        height: '50px',
-      })),
+      state(
+        'top',
+        style({
+          height: '70px'
+        })
+      ),
+      state(
+        'scroll',
+        style({
+          height: '50px'
+        })
+      ),
       transition('top <=> scroll', animate('100ms ease-in-out'))
     ])
   ]
 })
-
 export class NavComponent implements OnInit {
-
   title = 'PHOTO BLOG';
   search = false;
   menu = false;
@@ -41,8 +49,7 @@ export class NavComponent implements OnInit {
   stateScrollbar = 'auto';
   deviceWidth = window.innerWidth;
 
-  constructor(private elRef: ElementRef, private renderer: Renderer, private image: Image) {
-  }
+  constructor(private image: Image) {}
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event) {
@@ -83,12 +90,13 @@ export class NavComponent implements OnInit {
 
   toggleSearch() {
     this.search = !this.search;
-    this.stateSearchDiv = (this.stateSearchDiv === 'inactive' ? 'active' : 'inactive');
+    this.stateSearchDiv =
+      this.stateSearchDiv === 'inactive' ? 'active' : 'inactive';
   }
 
   toggleMenu() {
     this.menu = !this.menu;
-    this.stateScrollbar = (this.stateScrollbar === 'auto' ? 'hidden' : 'auto');
+    this.stateScrollbar = this.stateScrollbar === 'auto' ? 'hidden' : 'auto';
     document.documentElement.style.overflow = this.stateScrollbar;
   }
 

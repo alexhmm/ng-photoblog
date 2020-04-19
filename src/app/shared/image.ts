@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 const _IMAGES = [
   {id: 0, url: 'assets/photos/abstract-cosm.jpg', align: 'landscape', tags: 'art, abstract, white, distortion'},
